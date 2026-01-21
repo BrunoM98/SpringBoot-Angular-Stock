@@ -1,28 +1,40 @@
 package bm.inventary.service;
 
 import bm.inventary.entity.Product;
+import bm.inventary.repository.IRepositoryProduct;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProductService implements IProductService{
-    
+
+//    este repositorio no esta activo por lo que no es problema primero lo llena el constructor y despues se utiliza
+    private IRepositoryProduct iRepositoryProduct;
+
+//    no se utiliza autowired ya que puede traer conflictos a futuro
+    public ProductService(IRepositoryProduct iRepositoryProduct) {
+        this.iRepositoryProduct = iRepositoryProduct;
+    }
+
+
     @Override
     public List<Product> productList() {
-        return List.of();
+        return this.iRepositoryProduct.findAll();
     }
 
     @Override
     public Product searchProductID(Integer idProduct) {
-        return null;
+        return iRepositoryProduct.findById(idProduct).orElse(null);
     }
 
     @Override
     public void saveProduct(Product product) {
-
+        iRepositoryProduct.save(product);
     }
 
     @Override
     public void deleteProductID(Integer idProduct) {
-
+        iRepositoryProduct.deleteById(idProduct);
     }
 }
