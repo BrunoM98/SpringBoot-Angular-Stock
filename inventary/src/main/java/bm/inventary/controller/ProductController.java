@@ -4,10 +4,7 @@ import bm.inventary.entity.Product;
 import bm.inventary.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -36,5 +33,10 @@ public class ProductController {
         products.forEach(product -> logger.info(product.toString()));
         return products;
 
+    }
+    @PostMapping("/product")
+    public Product addProduct(@RequestBody Product product){
+        logger.info("Product Add", product);
+        return this.productService.saveProduct(product);
     }
 }

@@ -10,7 +10,7 @@ public interface IProductService {
 
     Product searchProductID(Integer idProduct);
 
-    void saveProduct(Product product);
+    Product saveProduct(Product product);
 
     void deleteProductID(Integer idProduct);
 

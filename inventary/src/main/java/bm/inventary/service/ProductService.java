@@ -29,8 +29,8 @@ public class ProductService implements IProductService{
     }
 
     @Override
-    public void saveProduct(Product product) {
-        iRepositoryProduct.save(product);
+    public Product saveProduct(Product product) {
+        return iRepositoryProduct.save(product);
     }
 
     @Override
