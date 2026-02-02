@@ -35,6 +35,7 @@ public class ProductController {
 
     }
     @PostMapping("/product")
+//    RequestBody funcion principal atrapar el JSON y transformarlo en un objeto de java para que se pueda compilar
     public Product addProduct(@RequestBody Product product){
         logger.info("Product Add", product);
         return this.productService.saveProduct(product);

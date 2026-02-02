@@ -10,7 +10,7 @@ import java.util.List;
 public class ProductService implements IProductService{
 
 //    este repositorio no esta activo por lo que no es problema primero lo llena el constructor y despues se utiliza
-    private IRepositoryProduct iRepositoryProduct;
+    private final IRepositoryProduct iRepositoryProduct;
 
 //    no se utiliza autowired ya que puede traer conflictos a futuro
     public ProductService(IRepositoryProduct iRepositoryProduct) {
