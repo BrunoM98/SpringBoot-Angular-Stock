@@ -3,21 +3,24 @@
         <h3>Product Add</h3>
 
     </div>
-    <form>
+    <form (ngSubmit)="onSubmit()">
         <div class="mb-3">
             <label for="description" class="form-label">
                 Product description</label>
-            <input type="text" class="form-control" id="description">
+            <input type="text" class="form-control" id="description" name="description"
+            [(ngModel)] = "product.description">
         </div>
         <div class="mb-3">
             <label for="price" class="form-label">
                 Produt Price</label>
-            <input type="number" step="any" class="form-control" id="price">
+            <input type="number" step="any" class="form-control" id="price" name="price"
+            [(ngModel)] = "product.price">
         </div>
         <div class="mb-3">
             <label for="stock" class="form-label">
                 Product Stock</label>
-            <input type="number" class="form-control" id="stock">
+            <input type="number" class="form-control" id="stock" name="stock"
+            [(ngModel)] = "product.stock">
         </div>
         <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="robotCheck" name="robotCheck" #robotCheck="ngModel"

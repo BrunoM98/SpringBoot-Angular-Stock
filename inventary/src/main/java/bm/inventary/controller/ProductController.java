@@ -40,4 +40,11 @@ public class ProductController {
         logger.info("Product Add", product);
         return this.productService.saveProduct(product);
     }
+    @PutMapping("/product")
+    public Product updateProduct(@RequestBody Product product) {
+        logger.info("Product Update: {}", product);
+        // En JPA, save() funciona para insertar Y para actualizar.
+        // Si el 'idProduct' que mandás en el JSON ya existe en la DB, lo pisa con los datos nuevos.
+        return this.productService.saveProduct(product);
+    }
 }
