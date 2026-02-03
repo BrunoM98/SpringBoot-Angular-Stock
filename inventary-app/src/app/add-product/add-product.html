@@ -1,1 +1,36 @@
-<p>add-product works!</p>
+<div class="container">
+    <div class="container text-center" style="margin: 30px;">
+        <h3>Product Add</h3>
+
+    </div>
+    <form>
+        <div class="mb-3">
+            <label for="description" class="form-label">
+                Product description</label>
+            <input type="text" class="form-control" id="description">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">
+                Produt Price</label>
+            <input type="number" step="any" class="form-control" id="price">
+        </div>
+        <div class="mb-3">
+            <label for="stock" class="form-label">
+                Product Stock</label>
+            <input type="number" class="form-control" id="stock">
+        </div>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="robotCheck" name="robotCheck" #robotCheck="ngModel"
+                ngModel required>
+            <label class="form-check-label" for="robotCheck">
+                I am not a robot
+            </label>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-warning btn-sm me-3" [disabled]="!robotCheck.value">
+                Submit
+            </button>
+            <a href="/" class="btn btn-danger btn-sm">Back</a>
+        </div>
+    </form>
+</div>

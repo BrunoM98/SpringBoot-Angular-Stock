@@ -19,7 +19,7 @@ public class ProductController {
 //    se manda informacion al loggin de la app
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
-    private ProductService productService;
+    private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
