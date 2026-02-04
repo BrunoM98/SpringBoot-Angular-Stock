@@ -1,9 +1,11 @@
 package bm.inventary.controller;
 
 import bm.inventary.entity.Product;
+import bm.inventary.exception.resourcenotfoundException;
 import bm.inventary.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,6 +41,17 @@ public class ProductController {
     public Product addProduct(@RequestBody Product product){
         logger.info("Product Add", product);
         return this.productService.saveProduct(product);
+    }
+    @GetMapping("/Product/{id}")
+    public ResponseEntity<Product> obtainProductID (
+            @PathVariable int id
+    ){
+        Product product = this.productService.searchProductID(id);
+        if(product != null){
+            return ResponseEntity.ok(product);
+        }else{
+            throw new resourcenotfoundException("ID NOT FOUND" + id);
+        }
     }
     @PutMapping("/product")
     public Product updateProduct(@RequestBody Product product) {
