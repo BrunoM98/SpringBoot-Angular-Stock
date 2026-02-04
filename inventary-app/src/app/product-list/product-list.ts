@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core'; // <--- Añad
 import { Product } from '../product';
 import { ProductService } from '../product-service';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -15,6 +16,7 @@ export class ProductList implements OnInit {
   products = signal<Product[]>([]); 
 
   private productService = inject(ProductService);
+  private IRouter = inject(Router);
 
   ngOnInit() {
     this.obteinProduct();
@@ -29,5 +31,8 @@ export class ProductList implements OnInit {
       },
       error: (error) => console.error("Error al obtener datos:", error)
     });
+  }
+   editProduct(id:number){
+    this.IRouter.navigate(['edit-product', id]);
   }
 }
