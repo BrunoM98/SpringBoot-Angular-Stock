@@ -19,4 +19,8 @@ export class ProductService {
 addProduct(product: Product): Observable<Object>{
   return this.clientHTTP.post(this.baseURL, product);  
 }
+
+obteinProdutID(id: number){
+  return this.clientHTTP.get<Product>(`${this.baseURL}/${id}`)    
+}
 }

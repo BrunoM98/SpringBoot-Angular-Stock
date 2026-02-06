@@ -18,7 +18,7 @@ import java.util.List;
 @CrossOrigin(value = "http://localhost:4200") // puerto default de angular;
 public class ProductController {
 
-//    se manda informacion al loggin de la app
+    //    se manda informacion al loggin de la app
     private static final Logger logger = LoggerFactory.getLogger(ProductController.class);
 
     private final ProductService productService;
@@ -28,7 +28,7 @@ public class ProductController {
     }
 
     @GetMapping("/product") //http://localhost:8080/stock-app/product
-    public List<Product> obtainProduct(){
+    public List<Product> obtainProduct() {
 
         List<Product> products = this.productService.productList();
         logger.info("Product List:");
@@ -36,21 +36,40 @@ public class ProductController {
         return products;
 
     }
+
     @PostMapping("/product")
 //    RequestBody funcion principal atrapar el JSON y transformarlo en un objeto de java para que se pueda compilar
-    public Product addProduct(@RequestBody Product product){
+    public Product addProduct(@RequestBody Product product) {
         logger.info("Product Add", product);
         return this.productService.saveProduct(product);
     }
+
     @GetMapping("/product/{id}")
-    public ResponseEntity<Product> obtainProductID (
+    public ResponseEntity<Product> obtainProductID(
             @PathVariable int id
-    ){
+    ) {
         Product product = this.productService.searchProductID(id);
-        if(product != null){
+        if (product != null) {
             return ResponseEntity.ok(product);
-        }else{
+        } else {
             throw new resourcenotfoundException("ID NOT FOUND" + id);
         }
+    }
+
+    @PutMapping("/product/{id}")
+    public ResponseEntity<Product> actProduct(@PathVariable int id, @RequestBody Product productACT) {
+//    Buscamos el producto que ya existe
+        Product product = this.productService.searchProductID(id);
+        if (product == null) {
+            return ResponseEntity.notFound().build(); // Devuelve un error 404 limpio
+        }
+//    Seteamos los nuevos valores del JSON al objeto de la base de datos
+        product.setDescription(productACT.getDescription());
+        product.setPrice(productACT.getPrice());
+        product.setStock(productACT.getStock());
+//    Guardamos los datos act
+        this.productService.saveProduct(product);
+//    Retornamos el objeto act al front como un JSON y decimos que la ejecucion salio bien 
+        return ResponseEntity.ok(product);
     }
 }
