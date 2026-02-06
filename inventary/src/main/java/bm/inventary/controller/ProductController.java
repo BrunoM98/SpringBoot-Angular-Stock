@@ -8,7 +8,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 //maneja peticiones http y devuelve JSON  se utiliza en APis REST;
 @RestController
@@ -69,7 +71,27 @@ public class ProductController {
         product.setStock(productACT.getStock());
 //    Guardamos los datos act
         this.productService.saveProduct(product);
-//    Retornamos el objeto act al front como un JSON y decimos que la ejecucion salio bien 
+//    Retornamos el objeto act al front como un JSON y decimos que la ejecucion salio bien
         return ResponseEntity.ok(product);
     }
+    @DeleteMapping("/product/{id}")
+//    Spring lo convierte a JSON automáticamente. Pero cuando borras algo, el producto ya no existe,
+//    entonces usamos un Map para crear un JSON "de respuesta" rápido sobre la marcha.
+    public ResponseEntity<Map<String, Boolean>> deleteProduct(@PathVariable int id){
+//        Buscamos si existe antes de borrar
+        Product product = this.productService.searchProductID(id);
+        if (product == null) {
+            throw new resourcenotfoundException("ID not found: " + id);
+
+        }
+//        Borramos físicamente de la DB
+            this.productService.deleteProductID(id);
+//        Angular prefiere objetos.
+//        Enviamos un JSON confirmando el borrado
+            Map<String, Boolean> response = new HashMap<>();
+            response.put("deleted", Boolean.TRUE);
+            return ResponseEntity.ok(response);
+
+    }
+
 }
