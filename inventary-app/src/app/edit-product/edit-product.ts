@@ -1,7 +1,7 @@
 import { Component, inject, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Product } from '../product';
 import { ProductService } from '../product-service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
 @Component({
@@ -16,6 +16,7 @@ export class EditProduct {
 
   private productService = inject(ProductService);
   private rout = inject(ActivatedRoute);
+  private router = inject(Router);
   
   ngOnInit(){
     this.id = this.rout.snapshot.params['id'];
@@ -26,7 +27,19 @@ export class EditProduct {
   }
 
   onSubmit(){
-    
+    this.saveProduct();
+  }
+
+  saveProduct(){
+    this.productService.editProduct(this.id, this.product).subscribe({
+      next: (data) => this.goProductList(),
+      error: (errors) => console.log(errors)
+      
+    });
+  }
+
+  goProductList(){
+    this.router.navigate(['/products']);
   }
 
 }

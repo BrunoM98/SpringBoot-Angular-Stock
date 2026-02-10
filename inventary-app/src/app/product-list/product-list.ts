@@ -35,4 +35,7 @@ export class ProductList implements OnInit {
    editProduct(id:number){
     this.IRouter.navigate(['edit-product', id]);
   }
+  deleteProduct(id:number){
+
+  }
 }

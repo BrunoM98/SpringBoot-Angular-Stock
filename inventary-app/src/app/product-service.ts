@@ -23,4 +23,7 @@ addProduct(product: Product): Observable<Object>{
 obteinProdutID(id: number){
   return this.clientHTTP.get<Product>(`${this.baseURL}/${id}`)    
 }
+editProduct(id:number, product: Product){
+  return this.clientHTTP.put(`${this.baseURL}/${id}`, product)
+}
 }
