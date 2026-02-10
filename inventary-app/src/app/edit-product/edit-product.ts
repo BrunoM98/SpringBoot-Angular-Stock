@@ -41,5 +41,6 @@ export class EditProduct {
   goProductList(){
     this.router.navigate(['/products']);
   }
+  
 
 }

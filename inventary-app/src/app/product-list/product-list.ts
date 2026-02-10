@@ -3,6 +3,7 @@ import { Product } from '../product';
 import { ProductService } from '../product-service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -35,7 +36,13 @@ export class ProductList implements OnInit {
    editProduct(id:number){
     this.IRouter.navigate(['edit-product', id]);
   }
-  deleteProduct(id:number){
+
+    deleteProduct(id:number){
+      this,this.productService.deleteProduct(id).subscribe({
+        next: (data) => this.obteinProduct(),
+        error: (errors) => console.log(errors) 
+      })
 
   }
+
 }

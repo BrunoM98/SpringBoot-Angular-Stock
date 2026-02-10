@@ -26,4 +26,7 @@ obteinProdutID(id: number){
 editProduct(id:number, product: Product){
   return this.clientHTTP.put(`${this.baseURL}/${id}`, product)
 }
+  deleteProduct(id:number): Observable<Object>{
+    return this.clientHTTP.delete(`${this.baseURL}/${id}`)
+  }
 }
