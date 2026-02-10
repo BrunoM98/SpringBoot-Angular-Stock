@@ -82,16 +82,14 @@ public class ProductController {
         Product product = this.productService.searchProductID(id);
         if (product == null) {
             throw new resourcenotfoundException("ID not found: " + id);
-
         }
 //        Borramos físicamente de la DB
-            this.productService.deleteProductID(id);
+            this.productService.deleteProductID(product.getIdProduct());
 //        Angular prefiere objetos.
 //        Enviamos un JSON confirmando el borrado
             Map<String, Boolean> response = new HashMap<>();
             response.put("deleted", Boolean.TRUE);
             return ResponseEntity.ok(response);
-
     }
 
 }
