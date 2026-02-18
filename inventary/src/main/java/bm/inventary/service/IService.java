@@ -4,7 +4,7 @@ import bm.inventary.entity.Product;
 
 import java.util.List;
 
-public interface IProductService {
+public interface IService {
 
     List<Product> productList();
 

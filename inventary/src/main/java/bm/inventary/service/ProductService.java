@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductService implements IProductService{
+public class ProductService implements IService {
 
 //    este repositorio no esta activo por lo que no es problema primero lo llena el constructor y despues se utiliza
     private final IRepositoryProduct iRepositoryProduct;
@@ -37,4 +37,5 @@ public class ProductService implements IProductService{
     public void deleteProductID(Integer idProduct) {
         iRepositoryProduct.deleteById(idProduct);
     }
+
 }
